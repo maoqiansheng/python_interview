@@ -1,0 +1,54 @@
+同源策略：
+
+1、源（origin）:相同的协议、域名、端口号 http:127.0.0.1:8000
+
+2、同源策略
+    2.1、概念：
+        同源策略是浏览器的一个安全功能，不同源的客户端脚本在没有明确授权的情况下，不能读写对方的资源
+        例如：a.com下的js脚本采用ajax读取b.com里面的文件数据是会报错的
+    2.2、不受同源策略限制的情况：
+        页面中的链接，重定向，表单提交
+        跨域资源的引入是可以的
+
+
+3、跨域
+    1、概念
+    受同源策略的影响，两个不同源想要互相访问资源，就需要跨域
+    2、实现形式
+        重要方式：跨资源共享CORS
+        CORS采用新的请求头origin和新的响应头Access-Control-Allow-Origin来扩展HTTP,它允许服务器通过头信息来显示的列出源，
+        或使用通配符来匹配所有的源并允许任何地址来请求文件
+
+
+4、在项目中的相关配置
+    1、我们在前端front/js目录中，创建host.js文件用以为前端保存后端域名，var host = 'http://api.meiduo.site:8000';
+
+    2、在所有需要访问后端接口的前端页面中都引入host.js，<script type="text/javascript" src="js/host.js"></script>
+
+    3、使用host变量即可指代后端域名，
+
+    4、pip install django-cors-headers
+
+    5、添加应用
+        INSTALLED_APPS = (
+            ...
+
+            'corsheaders',
+            ...
+        )
+    6、中间层设置，记得放到最前面，最先经过
+        MIDDLEWARE = [
+
+            'corsheaders.middleware.CorsMiddleware',
+            ...
+        ]
+    7、添加白名单
+        # CORS
+        CORS_ORIGIN_WHITELIST = (
+            '127.0.0.1:8080',
+            'localhost:8080',
+            'www.meiduo.site:8080'
+        )
+        CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
+    8、#允许哪些主机访问
+        ALLOWED_HOSTS = ['127.0.0.1','api.meiduo.site']
