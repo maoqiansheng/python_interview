@@ -1,0 +1,16 @@
+
+
+1、InnoDB支持事务，MyISAM不支持，这个非常重要，事务是一个高级的处理方式，在一些增删改中出错了还能回滚
+
+2、MyIASM适合查询和插入为主的应用，InnoDB适合频繁修改以及涉及到安全性较高的应用
+
+3、InnoDB支持外键， MyIASM不支持外键
+
+4、MyIASM是默认引擎，而InnoDB需要指定
+
+5、InnoDB不支持FULLTEXT类型的索引
+
+6、Innodb不保存表的行数，如果查询select count() from tables;需要扫描整个表，而MyISAM只要简单的读取表中保存的行数，但是count()后跟where
+   MyISAM也会扫描整个表
+
+7、InnoDB支持行锁
