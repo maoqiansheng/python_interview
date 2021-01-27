@@ -33,6 +33,7 @@ def quick_sort(alist, start, end):
     # 退出循环后，low 与high 重合，此时所指位置为基准元素的正确位置
     # 将基准元素放到该位置
     alist[low] = mid
+
     # 对基准元素左边的子序列进行快速排序
     quick_sort(alist, start, low-1)
     # 对基准元素右边的子序列进行快速排序

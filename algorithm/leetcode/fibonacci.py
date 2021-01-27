@@ -103,6 +103,18 @@ def fib(n):
     return 'done'
 
 
+#
+
+def fib(num):
+    fib_list = [0, 1]
+    for i in range(num-2):
+        fib_list.append(fib_list[-2] + fib_list[-1])
+    return fib_list
+
+
+print(fib(10))
+
+
 
 
 
