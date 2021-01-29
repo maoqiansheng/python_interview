@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1> 1、获取各种变量的值</h1>
+    <h3>整数：{{my_num + 20}}</h3>
+    <h3>字符串：{{my_str + "python"}}</h3>
+    <h3>元组：{{my_tuple}}, 元组第0个元素：{{my_tuple[0]}}</h3>
+    <h3>列表：{{my_list}}, 列表第0个元素：{{my_list[0]}}</h3>
+    <h3>字典：{{my_dict}}, name：{{my_dict.name}}, age:{{my_dict.age}}</h3>
+    <h1>2、遍历元组中所有的元素</h1>
+        {% for item in my_tuple %}
+            <li>{{item}}</li>
+        {% endfor %}
+    <h1>3、遍历取出列表中的偶数</h1>
+        {% for item in my_list %}
+            {% if item % 2 == 0 %}
+                {{item}}
+            {% endif %}
+        {% endfor %}
+    <h1>4.遍历字典内容</h1>
+    {% for key in my_dict %}
+        {# 如果直接是mydict.key ,那么这个key是一个字符串, 如果是 mydict[key], 那么key当成变量 #}
+        <li>{{ key }} = {{my_dict[key]}}</li>
+    {% endfor %}
+
+    {# 模版自带过滤器#}
+    <h1> 禁用转义：safe</h1>
+        <p>{{ '<em>hello</em>' | safe }}</p>
+    <h1> 把变量值的首字母变大写</h1>
+        <p> {{my_str | capitalize}}</p>
+    <h1> 把变量值的字母变大写 </h1>
+        <p> {{my_str | upper}}</p>
+    <h1> 把变量值的字母变小写 </h1>
+        <p> {{'HELLO' | lower}}</p>
+    <h1>title：把值中的每个单词的首字母都转成大写</h1>
+        <p> {{'hello world python' | title}}</p>
+    <h1> reverse :字符串反转</h1>
+        <p> {{'helloworld python' | reverse}}</p>
+    <h1> format</h1>
+        <p>{{'%s is %d' | format('name', 18)}}</p>
+    <h1>striptags：渲染之前把值中所有的HTML标签都删掉</h1>
+        <p>{{ '<em>hello</em>' | striptags }}</p>
+    <h1>first：取第一个元素, last:最后一个元素, length:长度, 和：sum, 排序sort</h1>
+        <p> {{my_list | first}} </p>
+        <p> {{my_list | last}} </p>
+        <p> {{my_list | length}} </p>
+        <p> {{my_list | sum}} </p>
+        <p> {{my_list | sort}} </p>
+
+
+
+</body>
+</html>
