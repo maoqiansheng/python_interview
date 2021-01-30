@@ -37,7 +37,7 @@ class Book(db.Model):
 
 
 # 展示
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def show_page():
     authors = Author.query.all()
     # book_list = []
@@ -50,7 +50,7 @@ def show_page():
 
 
 # 添加书籍
-@app.route('/add_book/', methods=['POST', 'GET'])
+@app.route('/add_book/', methods=['POST'],strict_slashes=False)
 def add_book():
     # 1、从表单获取参数
     author_name = request.form.get('author')
@@ -80,7 +80,7 @@ def add_book():
         db.session.add(book)
         db.session.commit()
     # 5.重定向展示页
-    return redirect(url_for('/'))
+    return redirect(url_for('show_page'))
 
 
 # 删除书籍
@@ -94,7 +94,7 @@ def delete_book(book_id):
     db.session.commit()
 
     # 3.重定向页面展示
-    return redirect(url_for('/'))
+    return redirect(url_for('show_page'))
 
 
 # 删除作者
@@ -112,7 +112,7 @@ def delete_author(author_id):
     db.session.commit()
 
     # 4.重定向展示页面
-    return redirect(url_for('/'))
+    return redirect(url_for('show_page'))
 
 
 if __name__ == '__main__':
