@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {#注册表单#}
+    <form action="/add_book" method="post">
+
+        {# 设置隐藏的csrf_token #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <p>
+        <label>作者</label><input type="text" name="author"><br>
+        </p>
+
+        <p>
+        <label>书籍</label><input type="text" name="book"><br>
+        </p>
+
+        <p>
+        <input type="submit" value="添加">
+        </p>
+
+        {% for message in get_flashed_messages() %}
+            <span style="color: red">{{ message }}</span>
+        {% endfor %}
+
+    </form>
+    <hr>
+
+    {# 书籍展示 #}
+    <h2>书籍展示</h2>
+    <ul>
+        {% for author in authors %}
+            <li>作者: {{ author.name }} <a href="{{ url_for('delete_author',author_id=author.id) }}">删除</a></li><br>
+            <ul>
+                {% for book in author.books %}
+                    <li>书籍: {{ book.name }} <a href="{{ url_for('delete_book',book_id=book.id) }}">删除</a></li><br>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+</body>
+</html>
