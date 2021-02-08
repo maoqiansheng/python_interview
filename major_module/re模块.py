@@ -49,3 +49,10 @@ else:
     print("匹配失败～！")
 
 # r 字符串前加r表示原生字符串
+
+# 练习
+# 提取数字
+s ='12j33jk12ksdjfkj23jk4h1k23h'
+nums_list = re.findall(r'\d', s)
+str1 = ''.join(nums_list)
+print(str1)
